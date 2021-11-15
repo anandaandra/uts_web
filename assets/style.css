@@ -1,0 +1,12 @@
+@media (max-width: 767px){
+    #button{
+        margin-bottom: 10px;
+        margin-right: 272px;
+    }
+}
+
+@media print{
+    #noPrint, #header, #input, #button{
+        display: none;
+    }
+}

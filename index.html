@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Spending App</title>
+
+    <!-- Import VUE CDN -->
+    <script src="https://unpkg.com/vue@3.0.5"></script>
+
+    <!-- Import Bootstrap and CSS -->
+    <link rel="stylesheet" href="./assets/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
+
+    <!-- Import Fontawesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body>
+    <div id="app">
+        <!-- Navbar Display -->
+        <navbar></navbar>
+
+        <!-- Data Input -->
+        <div class="container">
+            <header-text></header-text>
+            <div class="mb-3 row" id="input">
+                <label for="inputAmount" class="col-sm-2 col-form-label">Amount</label>
+                <div class="col-sm-10">
+                    <input v-model="total" type="number" placeholder="Enter amount" class="form-control" required>
+                </div>
+            </div>
+            <div class="mb-3 row" id="input">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    <input v-model="description" type="text" placeholder="Enter description" class="form-control" required>
+                </div>
+            </div>
+            <div class="d-grid justify-content-center" id="button-primary">
+                <button @click="submitData" class="btn btn-primary rounded-5" id="button">Submit</button>
+            </div>
+        </div>
+
+        <!-- Data Display -->
+        <div class="container">
+            <table class="table table-bordered mt-5">
+                <thead>
+                    <tr>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Description</th>
+                        <th scope="col" class="text-center" colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-if="!amounts.length">
+                        <td colspan="4" class="text-center">
+                            <no-entry-data></no-entry-data>
+                        </td>
+                    </tr>
+                    <tr v-for="(amount, index) in amounts" :key="index">
+                        <td>Rp. {{ amount.total }}</td>
+                        <td>{{ amount.description }}</td>
+                        <td>
+                            <div class="text-center" @click="editData(index)">
+                                <span class="fa fa-pen"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-center" @click="deleteData(index)">
+                                <span class="fa fa-trash"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Print Data -->
+        <print></print>
+
+        <!-- Footer Display -->
+        <footer-bar></footer-bar>        
+    </div>
+    
+    <!-- Import App VUE -->
+    <script src="./main.js"></script>
+
+    <!-- Import components VUE -->
+    <script src="./components/navbar.js"></script>
+    <script src="./components/header.js"></script>
+    <script src="./components/noEntryData.js"></script>
+    <script src="./components/print.js"></script>
+    <script src="./components/footer.js"></script>
+
+     <!--Mount app VUE-->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+</html>
